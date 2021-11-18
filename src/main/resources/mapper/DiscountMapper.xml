@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.cnpc.analysis.mapper.DiscountMapper">
+
+    <select id="selectDiscountByMaterial" resultMap="discountResultMap">
+        SELECT  a.plant, a.calday, a.discount_rate
+        from table_discount_rate a
+        WHERE a.material = #{material} and a.calday between '2016-01-01' and '2019-09-01'
+        order by a.calday
+    </select>
+
+    <!-- resultMap最终还是要将结果映射到pojo上，type就是指定映射到哪一个pojo -->
+    <!-- id：设置ResultMap的id -->
+    <!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id -->
+    <!-- property：主键在pojo中的属性名 -->
+    <!-- column：主键在数据库中的列名 -->
+    <resultMap id="discountResultMap" type="com.cnpc.analysis.bean.DiscountBean">
+        <result property="plant" column="plant"/>
+        <result property="calday" column="calday"/>
+        <result property="discountRate" column="discount_rate"/>
+    </resultMap>
+
+</mapper>

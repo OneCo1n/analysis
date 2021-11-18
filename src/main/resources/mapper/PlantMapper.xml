@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.cnpc.analysis.mapper.PlantMapper">
+
+    <select id="queryAllPlant" resultMap="PlantResultMap">
+        SELECT a.plant , a.date, a.number_station, a.number_store,b.plant_asset, b.road_class,
+            b.plant_stars,b.store_class,b.building_area, b.business_hall,b.paking_area,
+            b.store_area,b.plant_class_code,b.plant_location_class, b.plant_keyanliang_desc,
+            b.plant_type_desc
+        from table_number_station_store  a
+        left join table_pos_zaplant_xy_orc_508  b
+        on a.plant = b.bic_zaplant
+        where a.date BETWEEN '2019-01-01' and '2019-09-01'
+        order by a.date
+    </select>
+
+    <resultMap id="PlantResultMap" type="com.cnpc.analysis.bean.PlantBean">
+        <result property="plant" column="plant"/>
+        <result property="date" column="date"/>
+        <result property="numberStation" column="number_station"/>
+        <result property="numberStore" column="number_store"/>
+        <result property="plantAsset" column="plant_asset"/>
+        <result property="roadClass" column="road_class"/>
+        <result property="plantStars" column="plant_stars"/>
+        <result property="storeClass" column="store_class"/>
+        <result property="buildingArea" column="building_area"/>
+        <result property="businessHall" column="business_hall"/>
+        <result property="pakingArea" column="paking_area"/>
+        <result property="storeArea" column="store_area"/>
+        <result property="plantClassCode" column="plant_class_code"/>
+        <result property="plantLocationClass" column="plant_location_class"/>
+        <result property="plantKeyanliangDesc" column="plant_keyanliang_desc"/>
+        <result property="plantTypeDesc" column="plant_type_desc"/>
+
+    </resultMap>
+
+</mapper>

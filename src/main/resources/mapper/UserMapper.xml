@@ -5,5 +5,4 @@
     <select id="getInfo"  resultType="com.cnpc.analysis.bean.UserBean">
         SELECT * FROM user WHERE name = #{name} AND password = #{password}
     </select>
-
 </mapper>
